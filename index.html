@@ -4,16 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
     <title>Document</title>
 </head>
 
 <body>
-    <p>Click the button to get your coordinates.</p>
-    <button onclick="getLocation()">Know the weather</button>
-    <label id="data"></label>
-    <p id="demo"></p>
+    <div class="container-fluid px-1 px-md-4 py-5 mx-auto">
+        <div class="row d-flex justify-content-center px-3">
+            <div class="card">
+                <h2 class="ml-auto mr-4 mt-3 mb-0" id="city"></h2>
+                <p class="ml-auto mr-4 mb-0 med-font" id="status"></p>
+                <h1 class="ml-auto mr-4 large-font" id="temp"></h1>
+                <p class="time-font mb-0 ml-4 mt-auto" id="time"></p>
+                <p class="ml-4 mb-4" id="date"></p>
+            </div>
+        </div>
+        <button onclick="getLocation()">Click here to get the weather</button>
+    </div>
     <script src="script.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </body>
 
 </html>
