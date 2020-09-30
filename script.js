@@ -1,6 +1,7 @@
 let lati, long;
 let today = new Date();
 
+//Capitalize each word in a phrase
 const capitalizePhrase = (phrase) => {
     return phrase
       .toLowerCase()
@@ -15,14 +16,13 @@ const getLocation = async () => {
     } 
 }
 
-
 const showPosition = async (position) => {
-
     lati = position.coords.latitude;
     long = position.coords.longitude;
     await sendDataToBackend('locationInfo', { lati, long });
 }
 
+//Get location and send it to backend
 const sendDataToBackend = async (endpointURL, data) => {
     return await fetch('https://weather-xa-backend.herokuapp.com/' + endpointURL, {
         method: 'post',
@@ -35,7 +35,7 @@ const sendDataToBackend = async (endpointURL, data) => {
         (data) => { return data.json(); }
     ).then(
         (data) => {
-
+            //Set new data on card
             document.getElementById('city').innerHTML = data.city;
             document.getElementById('status').innerHTML = capitalizePhrase(data.status);
             document.getElementById('temp').innerHTML = data.temperature + '&#8451;';
@@ -44,8 +44,9 @@ const sendDataToBackend = async (endpointURL, data) => {
     )
 }
 
+//Set time on card
 const setTime = () => {
     document.getElementById('time').innerHTML =((today.getHours() < 10 ? '0' : '') + today.getHours()) + ":" + ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
-    document.getElementById('date').innerHTML = today.toLocaleDateString("en-US", { weekday: 'long', month: 'long', day: 'numeric' });
+    document.getElementById('date').innerHTML = today.toLocaleDateString("en-US", { weekday: 'short', month: 'long', day: 'numeric' });
 }
 setTime();
