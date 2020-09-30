@@ -1,4 +1,4 @@
-let latitude, longitude;
+let lati, long;
 let today = new Date();
 
 const capitalizePhrase = (phrase) => {
@@ -9,18 +9,18 @@ const capitalizePhrase = (phrase) => {
       .join(' ');
   };
 
-
 const getLocation = async () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } 
 }
 
+
 const showPosition = async (position) => {
 
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    await sendDataToBackend('locationInfo', { latitude, longitude });
+    lati = position.coords.latitude;
+    long = position.coords.longitude;
+    await sendDataToBackend('locationInfo', { lati, long });
 }
 
 const sendDataToBackend = async (endpointURL, data) => {
@@ -35,6 +35,7 @@ const sendDataToBackend = async (endpointURL, data) => {
         (data) => { return data.json(); }
     ).then(
         (data) => {
+
             document.getElementById('city').innerHTML = data.city;
             document.getElementById('status').innerHTML = capitalizePhrase(data.status);
             document.getElementById('temp').innerHTML = data.temperature + '&#8451;';
@@ -45,6 +46,6 @@ const sendDataToBackend = async (endpointURL, data) => {
 
 const setTime = () => {
     document.getElementById('time').innerHTML =((today.getHours() < 10 ? '0' : '') + today.getHours()) + ":" + ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
-    document.getElementById('date').innerHTML = today.toLocaleDateString("en-US", { weekday: 'short', month: 'long', day: 'numeric' });
+    document.getElementById('date').innerHTML = today.toLocaleDateString("en-US", { weekday: 'long', month: 'long', day: 'numeric' });
 }
 setTime();
