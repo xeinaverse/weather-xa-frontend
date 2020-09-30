@@ -1,19 +1,25 @@
 let lati, long;
 let today = new Date();
 
+//Set time on card
+const setTime = () => {
+    document.getElementById('time').innerHTML = ((today.getHours() < 10 ? '0' : '') + today.getHours()) + ":" + ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
+    document.getElementById('date').innerHTML = today.toLocaleDateString("en-US", { weekday: 'short', month: 'long', day: 'numeric' });
+}
+
 //Capitalize each word in a phrase
 const capitalizePhrase = (phrase) => {
     return phrase
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  };
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+};
 
 const getLocation = async () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } 
+    }
 }
 
 const showPosition = async (position) => {
@@ -43,10 +49,3 @@ const sendDataToBackend = async (endpointURL, data) => {
         }
     )
 }
-
-//Set time on card
-const setTime = () => {
-    document.getElementById('time').innerHTML =((today.getHours() < 10 ? '0' : '') + today.getHours()) + ":" + ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
-    document.getElementById('date').innerHTML = today.toLocaleDateString("en-US", { weekday: 'short', month: 'long', day: 'numeric' });
-}
-setTime();
